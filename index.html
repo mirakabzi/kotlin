@@ -114,75 +114,69 @@
           </p>
 
         <ul>
-            <li>The easier the code is to understand the easier it to see the actual logic and if necessary fix it
+            <li>هرچه درک کد آسان تر باشد، منطق واقعی را راحت تر می بینید و در صورت لزوم آن را برطرف می کند
                 <ul>
-                    <li>Use your judgement
+                  <li>از قضاوت خود بهره بگیرید  
+                    <ul>
+                        <li>در بیشتر موارد، خوانایی برای یک کار خاص اهمیت بالاتری نسبت به پایبندی به قرارداد دارد. با این‌ حال، پیروی از قراردادها نیز می‌تواند موجب خواناتر شدن محتوا شود. تلاش کنید تنها زمانی از قراردادها فاصله بگیرید که این کار به طور آشکاری خوانایی را بهبود دهد.</li>
+                     </ul>
+                   </li>
+                    <li>مختصر همیشه برابر با خواندن نیست
                         <ul>
-                            <li>Readability for a particular task is generally more valuable than following convention,
-                                but convention makes things more readable. Try to maintain a balance of only breaking
-                                convention when there is a clear readability improvement</li>
+                            <li>
+                              زنجیره عملکرد شما با چندین عملیات الویس که می تواند با ارسال آن به یک لامبدا گسترش یابد ممکن است واقعا جالب و هوشمندانه باشد، اما آیا درک آن آسان تر خواهد بود اگر آن را به سبک ساده قدیمی جاوا بنویسید؟
+                            </li>
                         </ul>
                     </li>
-                    <li>Concise does not always equate readable
+                    <li>توسعه دهندگان جدید به احتمال زیاد جاوا را بهتر از کاتلین می شناسند، بنابراین هنگام نوشتن کد این را در نظر بگیرید.
                         <ul>
-                            <li>Your function chain with multiple elvis operations that can be extended by passing it a
-                                lambda might be really cool and clever, but would it be easier to understand if you just
-                                wrote it out in plain old Java style?</li>
-                        </ul>
-                    </li>
-                    <li>New developers will most likely know Java better than Kotlin, so consider this when writing
-                        code.
-                        <ul>
-                            <li>If you’re doing something Kotlin specific that isn’t covered here, consider how easy it
-                                to understand and if necessary add a comment into your code or a section to this
-                                document</li>
+                            <li>اگر کاری خاص کاتلین انجام می دهید که در اینجا به آن پرداخته نشده است، در نظر بگیرید که درک آن چقدر آسان است و در صورت لزوم یک نظر به کد خود یا بخشی به این سند اضافه کنید</li>
                         </ul>
                     </li>
                 </ul>
             </li>
         </ul>
 
-        <h3 id="keep-it-safe">Keep it <strong>Safe</strong></h3>
+        <h3 id="keep-it-safe">آن را <strong>ایمن</strong> نگه دارید</h3>
 
         <ul>
-            <li>Take full advantage of the added safety features: immutability and null safety</li>
+            <li>از ویژگی های ایمنی اضافه شده نهایت استفاده را ببرید: تغییرناپذیری و ایمنی تهی</li>
         </ul>
 
-        <h2 id="coding-conventions">Coding conventions</h2>
+        <h2 id="coding-conventions">قراردادهای کدنویسی</h2>
 
         <ul>
-            <li>We follow the Kotlin official conventions unless specifically overruled by this document
+            <li>ما از کنوانسیون های رسمی کاتلین پیروی می کنیم مگر اینکه به طور خاص توسط این سند لغو شود
                 <ul>
                     <li><a
                             href="https://kotlinlang.org/docs/reference/coding-conventions.html">https://kotlinlang.org/docs/reference/coding-conventions.html</a>
                     </li>
-                    <li>Several points from the above reference are also listed in this document to highlight them</li>
-                    <li>It is important to follow the general coding conventions for most things as this makes it easier
-                        for new developers to understand our code, but there are times when your particular problem can
-                        be solved in a non standard way that is actually more readable in that particular case.</li>
+                    <li>چندین نکته از مرجع فوق نیز در این سند ذکر شده است تا آنها را برجسته کند</li>
+                    <li>پیروی از قراردادهای کدنویسی عمومی برای بیشتر موارد مهم است زیرا این امر درک کد ما را برای توسعه دهندگان جدید آسان تر می کند، اما مواقعی وجود دارد که مشکل خاص شما می تواند به روشی غیر ساده حل شود که در واقع در آن مورد خاص قابل خواندن تر است.</li>
                 </ul>
             </li>
         </ul>
 
-        <h2 id="safe-variable-declarations">Safe variable declarations</h2>
+        <h2 id="safe-variable-declarations">اعلان های متغیر ایمن</h2>
 
         <ul>
-            <li>Always use a <strong>non-nullable type</strong> whenever possible</li>
-            <li>Always declare variables as <strong>val</strong> unless you have a specific reason to use <em>var</em>
+            <li>همیشه در صورت امکان از <strong>یک نوع غیر قابل انکار</strong> استفاده کنید
+              </li>
+            <li>همیشه متغیرها را به عنوان <strong>val</strong> اعلام کنید مگر اینکه دلیل خاصی برای استفاده از <em>var</em> داشته باشید
             </li>
-            <li>Also use <strong>immutable collections</strong> instead of mutable ones</li>
-            <li>If you need to declare a variable before assigning it a value instead of nullable declare it as
+            <li>همچنین از <strong>کالکشن های تغییرناپذیر</strong> به جای کالکشن های قابل تغییر استفاده کنید</li>
+            <li>اگر لازم است متغیری را قبل از اختصاص دادن یک مقدار به جای nullable اعلام کنید، آن را به صورت
                 <strong>lateinit</strong>
                 <ul>
-                    <li>If you find yourself doing this check if you should instead refactor your code to a lambda
-                        declaration to initialize the value instead
+                    <li>اگر متوجه شدید که این کار را انجام می دهید، بررسی کنید که آیا باید کد خود را به یک اعلان لامبدا تغییر دهید تا به جای آن مقدار را مقداردهی اولیه کنید.
                         <ul>
                             <li>e.g. <em>val x = { when (y) { … } }</em></li>
                         </ul>
                     </li>
                 </ul>
             </li>
-            <li>Use <strong>safe calls</strong> and <strong>elvis operator</strong> with nullable variables
+            <li>
+              استفاده از <strong>تماس های ایمن</strong> و <strong>عملگر elvis</strong> با متغیرهای nullable
                 <ul>
                     <li><a
                             href="https://kotlinlang.org/docs/reference/null-safety.html#safe-calls">https://kotlinlang.org/docs/reference/null-safety.html#safe-calls</a>
@@ -190,12 +184,12 @@
                     <li><a
                             href="https://kotlinlang.org/docs/reference/null-safety.html#elvis-operator">https://kotlinlang.org/docs/reference/null-safety.html#elvis-operator</a>
                     </li>
-                    <li><em><strong>Do not use !!</strong></em> to force null pointer exceptions</li>
+                    <li><em><strong>استفاده نکنید !!</strong></em> برای اجباری کردن استثنائات اشاره گر تهی</li>
                 </ul>
             </li>
         </ul>
 
-        <h2 id="use-when">Use <em><strong>when</strong></em></h2>
+        <h2 id="use-when">از <em><strong>when</strong></em> استفاده کنید</h2>
 
         <p><a
                 href="https://kotlinlang.org/docs/reference/control-flow.html#when-expression">https://kotlinlang.org/docs/reference/control-flow.html#when-expression</a>

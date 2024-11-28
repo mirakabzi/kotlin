@@ -345,31 +345,31 @@
         <h3 id="return-values">مقدار بازگشتی</h3>
 
         <ul>
-            <li><strong>Avoid returning null</strong> (especially on public functions)
+            <li><strong>از بازگرداندن null خودداری</strong> کنید (به ویژه در عملکردهای عمومی)
                 <ul>
-                    <li><strong>Null should never be used to denote an error state</strong>
+                    <li><strong>از Null هرگز نباید برای نشان دادن وضعیت خطا استفاده شود</strong>
                         <ul>
-                            <li>Instead throw an exception</li>
-                            <li>Or consider using a sealed class (see below)</li>
+                          <li>در عوض یک استثنا ایجاد</li> کنید
+                          <li>یا استفاده از یک کلاس مهر و موم شده را در نظر بگیرید (به زیر مراجعه کنید)</li>
                         </ul>
                     </li>
-                    <li>When successful execution sometimes yields no results
+                    <li>هنگامی که اجرای موفقیت آمیز گاهی اوقات هیچ نتیجه ای به همراه ندارد
                         <ul>
-                            <li>If the return object is a collection simply return an empty collection</li>
-                            <li>On a case-by-case basis you need to decide when it makes more sense to return a nullable
-                                or simply throw an exception anyway or defining a sealed class (see below)
+                            <li>اگر شی برگشتی یک مجموعه است، به سادگی یک مجموعه خالی را برگردانید</li>
+                            <li>به صورت موردی باید تصمیم بگیرید که چه زمانی بازگرداندن یک nullable منطقی تر است
+                              یا به سادگی یک استثنا را به هر حال پرتاب کنید یا یک کلاس مهر و موم شده را تعریف کنید (به زیر مراجعه کنید)
                                 <ul>
-                                    <li>This can be difficult to determine when first writing a class</li>
-                                    <li>It mainly comes down to usage
+                                    <li>تعیین این موضوع هنگام نوشتن یک کلاس می تواند دشوار باشد</li>
+                                    <li>این عمدتا به استفاده برمی گردد
                                         <ul>
-                                            <li>If not returning anything is a common occurrence where no action is,
-                                                other than filtering the result or similar, is required nullable might
-                                                make more sense</li>
-                                            <li>If returning nothing is exceptionally rare or you usually need to do
-                                                some handling when it happens (log, stop execution, trigger a different
-                                                function, etc) then throwing an exception is probably a better idea</li>
-                                            <li>Also see the note about sealed classes below as an option, especially if
-                                                returning a data class that represents the result of an external query
+                                            <li>اگر برگرداندن چیزی یک اتفاق رایج است که در آن هیچ اقدامی وجود ندارد، به غیر از فیلتر کردن نتیجه یا موارد مشابه، مورد نیاز است، nullable ممکن است منطقی تر باشد
+
+                                            </li>
+                                            <li>
+                                              اگر بازگرداندن چیزی بسیار نادر است یا معمولا باید در صورت وقوع آن مقداری مدیریت کنید (ورود به سیستم، توقف اجرا، راه اندازی یک عملکرد متفاوت و غیره) احتمالا پرتاب یک استثنا ایده بهتری است
+                                              </li>
+                                            <li>
+                                              همچنین یادداشت مربوط به کلاس های مهر و موم شده را در زیر به عنوان یک گزینه ببینید، به خصوص اگر یک کلاس داده را برگردانید که نتیجه یک پرس و جو خارجی را نشان می دهد
                                             </li>
                                         </ul>
                                     </li>
@@ -379,34 +379,27 @@
                     </li>
                 </ul>
             </li>
-            <li>Protect your mutables from other objects making changes to them accidentally
+            <li>از تغییر شکل های خود در برابر اشیاء دیگری که به طور تصادفی در آنها تغییراتی ایجاد می کنند محافظت کنید
                 <ul>
-                    <li>When returning a mutable collection you should upcast it to a non-mutable version
+                    <li>هنگام بازگرداندن یک مجموعه قابل تغییر، باید آن را به یک نسخه غیرقابل تغییر منتقل کنید
                         <ul>
-                            <li>e. return mutableList as List</li>
+                            <li>e. تغییر لیست را به عنوان لیست برگردانید</li>
                         </ul>
                     </li>
-                    <li>Similarly you should attempt to protect your other class variables by only returning immutable
-                        ones or copies of the data instead of the original.</li>
+                    <li>به طور مشابه، شما باید سعی کنید از سایر متغیرهای کلاس خود فقط با بازگرداندن متغیرهای تغییرناپذیر یا کپی داده ها به جای اصل محافظت کنید.</li>
                 </ul>
             </li>
-            <li>Use <em>Pair</em> and <em>Triple</em> as return values sparingly
+            <li>استفاده <em>از Pair</em> و <em>Triple</em> به عنوان مقادیر بازگشتی به مقدار کم
                 <ul>
-                    <li>Sometimes you will find yourself wanting to return a few values and for that <em>Pair</em> and
-                        <em>Triple</em> are the simplest solution</li>
-                    <li>However a better, if slightly more verbose, tactic is to declare a return object data class that
-                        contains those values. This makes the handling more explicit and easier to read.</li>
-                    <li>As a quick rule of thumb <strong>internal functions can use <em>Pairs</em> and
-                            <em>Triples</em></strong> since the creation and handling will always be in the same class,
-                        but <strong>public functions should instead return data classes</strong></li>
-                    <li>You will notice that many Kotlin libraries do in fact use Pairs &amp; Triples as the public
-                        return values, but you will also notice that to use them you will pretty much always have to go
-                        to the source code to figure out what is actually returned and in what order.</li>
+                    <li>گاهی اوقات متوجه می شوید که می خواهید چند مقدار را برگردانید و برای آن <em>Pair</em> و <em>Triple</em> ساده ترین راه حل هستند</li>
+                    <li>با این حال، یک تاکتیک بهتر، اگر کمی پرحرف تر، اعلام یک کلاس داده شی برگشتی است که حاوی آن مقادیر است. این باعث می شود که مدیریت صریح تر و خواندن آن آسان تر شود.</li>
+                    <li>به عنوان یک قاعده سرانگشتی سریع، <strong>توابع داخلی می توانند از <em>Pairs</em> و <em>Triples</em> استفاده</strong> کنند، زیرا ایجاد و مدیریت همیشه در یک کلاس خواهد بود، اما <strong>توابع عمومی باید در عوض کلاس های داده را برگردانند</strong></li>
+                    <li>متوجه خواهید شد که بسیاری از کتابخانه های کاتلین در واقع از Pairs &amp; Triples به عنوان مقادیر بازگشتی استفاده می کنند، اما همچنین متوجه خواهید شد که برای استفاده از آنها تقریبا همیشه باید به کد منبع بروید تا بفهمید چه چیزی واقعا و به چه ترتیبی بازگردانده می شود.</li>
                 </ul>
             </li>
         </ul>
 
-        <h4 id="returning-sealed-classes">Returning sealed classes</h4>
+        <h4 id="returning-sealed-classes">بازگرداندن کلاس های مهر و موم شده</h4>
 
         <p><a
                 href="https://kotlinlang.org/docs/reference/sealed-classes.html">https://kotlinlang.org/docs/reference/sealed-classes.html</a>
@@ -417,69 +410,54 @@
         </p>
 
         <ul>
-            <li>The above blog post describes a nice looking way of using sealed classes to return success &amp; error
-                states. Consider using it over simply throwing an exception.</li>
+            <li>وبلاگ بالا روشی زیبا برای استفاده از کلاس های مهر و موم شده برای بازگرداندن حالت های موفقیت و خطا را توصیف می کند. استفاده از آن را به جای انداختن یک استثنا در نظر بگیرید.</li>
         </ul>
 
-        <h3 id="chaining-collection-functions">Chaining collection functions</h3>
+        <h3 id="chaining-collection-functions">توابع مجموعه زنجیره ای</h3>
 
         <ul>
-            <li>Unlike Java Stream API you do not have to explicitly declare that you want to change a collection to a
-                stream and finally explicitly collect the result afterwards.
+            <li>برخلاف Java Stream API لازم نیست صریحا اعلام کنید که می خواهید یک مجموعه را به یک جریان تغییر دهید و در نهایت پس از آن به صراحت نتیجه را جمع آوری کنید.
                 <ul>
-                    <li>This means, again, less boilerplate for simple streaming operations like mapping and filtering
+                    <li>این بدان معناست که باز هم برای عملیات پخش ساده مانند نقشه برداری و فیلتر کردن کمتر است
                     </li>
                 </ul>
             </li>
-            <li>Also means each function is implicitly collected and when chaining functions each item in the collection
-                must go through the function before we run the next function on them
+            <li>همچنین به این معنی است که هر تابع به طور ضمنی جمع آوری می شود و هنگام زنجیره سازی توابع، هر مورد در مجموعه باید قبل از اجرای تابع بعدی روی آنها از طریق تابع عبور کند
                 <ul>
-                    <li>This can lead it being slower than Java stream operations which process item at a time rather
-                        than chained function at a time</li>
-                    <li>For this reason Kotlin introduces <em>sequences</em> which work exactly like Java streams</li>
+                    <li>این می تواند باعث شود که کندتر از عملیات جریان جاوا باشد که آیتم را در یک زمان به جای عملکرد زنجیره ای در یک زمان پردازش می کند</li>
+                    <li>به همین دلیل، کاتلین <em>دنباله هایی</em> را معرفی می کند که دقیقا مانند جریان های جاوا کار می کنند</li>
                 </ul>
             </li>
-            <li>Whenever you are <strong>chaining multiple functions on a collection</strong> with more than trivial
-                number of items, the best practise is to declare it as a <strong>sequence</strong>
+            <li>هر زمان که <strong>چندین تابع را در یک مجموعه</strong> با بیش از تعداد ناچیز آیتم ها زنجیر می کنید، بهترین روش این است که آن را به عنوان یک <strong>دنباله اعلام کنید</strong>
                 <ul>
                     <li><a
                             href="https://blog.kotlin-academy.com/effective-kotlin-use-sequence-for-bigger-collections-with-more-than-one-processing-step-649a15bb4bf">https://blog.kotlin-academy.com/effective-kotlin-use-sequence-for-bigger-collections-with-more-than-one-processing-step-649a15bb4bf</a>
                     </li>
-                    <li>Kotlin sequences are not parallel and for massive data sets you can be better off using Java
-                        parallel streams</li>
+                    <li>دنباله های کاتلین موازی نیستند و برای مجموعه داده های عظیم می توانید از جریان های موازی جاوا استفاده کنید</li>
                 </ul>
             </li>
         </ul>
 
-        <h3 id="nested-lambdas">Nested lambdas</h3>
+        <h3 id="nested-lambdas">لامبدا تو در تو</h3>
 
         <ul>
-            <li><strong>When nesting lambdas</strong> take particular care to retain readability and you should
-                <strong>avoid using the <em>‘it’</em> default parameter name</strong>, as it can get hard too see which
-                lambda level <em>it</em> refers to</li>
+            <li><strong>هنگام تودرتو کردن لامبداها</strong> برای حفظ خوانایی دقت ویژه ای داشته باشید و باید <strong>از استفاده از نام پارامتر پیش فرض <em>"it"</em> خودداری</strong> کنید، زیرا ممکن است سخت باشد که ببینید <em>به کدام سطح</em> لامبدا اشاره می کند</li>
         </ul>
 
-        <h3 id="top-level-functions">Top level functions</h3>
+        <h3 id="top-level-functions">توابع سطح بالا</h3>
 
         <ul>
-            <li>Top level functions replace utility classes</li>
-            <li>They are not declared inside a class, instead they can theoretically be declared in any file inside a
-                package</li>
-            <li>But best practise is to have a [Package/Domain/Etc]<strong>Utils.kt</strong> file in the package and
-                declare all the top level functions in there</li>
-            <li>If your <strong>utility function is only used by one class or only needed when dealing with a
-                    particular</strong> class it should probably not be declared as a top level function, but instead it
-                <strong>should be declared inside that class</strong> (see also Companion objects above)</li>
+            <li>توابع سطح بالا جایگزین کلاس های ابزار می شوند</li>
+            <li>آنها در داخل یک کلاس اعلام نمی شوند، در عوض می توانند از نظر تئوری در هر فایلی در یک بسته اعلام شوند</li>
+            <li>اما بهترین روش این است که یک فایل [Package/Domain/<strong>Etc]Utils.kt</strong> در بسته داشته باشید و تمام توابع سطح بالا را در آنجا اعلام کنید</li>
+            <li>اگر <strong>تابع ابزار شما فقط توسط یک کلاس استفاده می شود یا فقط هنگام برخورد با یک کلاس خاص مورد نیاز</strong> است، احتمالا نباید به عنوان یک تابع سطح بالا اعلام شود، بلکه باید <strong>در داخل آن کلاس اعلام</strong> شود (همچنین به اشیاء همراه در بالا مراجعه کنید)</li>
         </ul>
 
-        <h3 id="closeables">Closeables</h3>
+        <h3 id="closeables">قابلیت close</h3>
 
         <ul>
-            <li>Some resources (streams, clients etc.) implement the Closeable interface and after using it you need to
-                explicitly call close() to tell the jvm that you no longer require that resource and it can be garbage
-                collected.</li>
-            <li>Kotlin provides a <strong>use block</strong> that ensures that the resource is properly closed
-                afterwards despite any error conditions or the like
+            <li>برخی از منابع (جریان ها، کلاینت ها و غیره) رابط Closeable را پیاده سازی می کنند و پس از استفاده از آن باید صریحا close() را فراخوانی کنید تا به jvm بگویید که دیگر به آن منبع نیاز ندارید و می توان آن را زباله جمع آوری کرد.</li>
+            <li>کاتلین یک <strong>بلوک استفاده</strong> را ارائه می دهد که تضمین می کند منبع پس از آن با وجود هر گونه شرایط خطا یا موارد مشابه به درستی بسته می شود
                 <ul>
                     <li><a
                             href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/use.html">https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/use.html</a>
@@ -488,84 +466,76 @@
             </li>
         </ul>
 
-        <h2 id="java-libraries">Java libraries</h2>
+        <h2 id="java-libraries">کتابخانه های جاوایی</h2>
 
         <ul>
-            <li>Extensions can be used to modify external library behaviour either to provide a more Kotlin like
-                experience or to add a layer of domain specific logic
+            <li>از برنامه های افزودنی می توان برای تغییر رفتار کتابخانه خارجی استفاده کرد تا تجربه ای شبیه کاتلین ارائه دهد یا لایه ای از منطق خاص دامنه را اضافه کند
                 <ul>
                     <li><a
                             href="https://kotlinlang.org/docs/reference/extensions.html">https://kotlinlang.org/docs/reference/extensions.html</a>
                     </li>
                 </ul>
             </li>
-            <li>Keep in mind that Kotlin can not tell whether a Java method can return null (unless it has been
-                correctly annotated) instead it returns a Platform Type
+            <li>به خاطر داشته باشید که کاتلین نمی تواند بگوید که آیا یک روش جاوا می تواند null را برگرداند یا خیر (مگر اینکه به درستی حاشیه نویسی شده باشد) در عوض یک نوع پلتفرم را برمی گرداند
                 <ul>
                     <li><a
                             href="https://kotlinlang.org/docs/reference/java-interop.html">https://kotlinlang.org/docs/reference/java-interop.html</a>
                     </li>
                 </ul>
             </li>
-            <li>Best practice is to <strong>assume that any return values from calls to Java code are always
-                    nullable</strong> , that way the IDE will force you to use safe calls
+            <li>بهترین روش این است که <strong>فرض کنید هر مقدار برگشتی از تماس ها به کد جاوا همیشه null</strong> است، به این ترتیب IDE شما را مجبور به استفاده از تماس های ایمن می کند.
                 <ul>
-                    <li>g. If you call a Java method that declares a return type of String <strong>explicitly
-                            declare</strong> a variable created from that as String?
+                    <li>g. اگر یک روش جاوا را فراخوانی کنید که نوع بازگشتی رشته را اعلام می کند، <strong>به صراحت</strong> متغیری را که از آن ایجاد شده است به عنوان رشته اعلام کنید؟
                         <ul>
                             <li>val fromJava: String? = JavaObject.method()</li>
                         </ul>
                     </li>
-                    <li>Libraries may change, even if you know a Java library can never, under any circumstances, return
-                        null, if it isn’t annotated you can not trust that it won’t change without you noticing</li>
+                    <li>کتابخانه ها ممکن است تغییر کنند، حتی اگر بدانید که یک کتابخانه جاوا هرگز نمی تواند تحت هیچ شرایطی null را برگرداند، اگر حاشیه نویسی نشده باشد، نمی توانید اعتماد کنید که بدون توجه شما تغییر نخواهد کرد</li>
                 </ul>
             </li>
         </ul>
 
-        <h2 id="style">Style</h2>
+        <h2 id="style">استایل</h2>
 
-        <h2 id="tools-and-libraries">Tools and libraries</h2>
+        <h2 id="tools-and-libraries">ابزارها و کتابخانه ها</h2>
 
-        <h3 id="logging">Logging</h3>
+        <h3 id="logging">ورود</h3>
 
         <ul>
-            <li>We use a lazy logging library called kotlin-logging
+            <li>ما از یک کتابخانه لاگینگ به نام kotlin-logging استفاده می کنیم
                 <ul>
                     <li><a
                             href="https://github.com/MicroUtils/kotlin-logging">https://github.com/MicroUtils/kotlin-logging</a>
                     </li>
                 </ul>
             </li>
-            <li>You can create the logger variable outside of you actual class as a top level declaration</li>
+            <li>شما می توانید متغیر logger را خارج از کلاس واقعی خود به عنوان یک اعلان سطح بالا ایجاد کنید</li>
             <li><a
                     href="https://github.com/MicroUtils/kotlin-logging#usage">https://github.com/MicroUtils/kotlin-logging#usage</a>
-                suggest setting up an Idea live template to speed up the logger variable creation</li>
-            <li>You can also have your class extend Kloggin, but that leads to having multiple ways of declaring the
-                logger based on what your companion object looks like, so while cleaner looking it is not recommended
+                    پیشنهاد راه اندازی یک الگوی زنده ایده برای سرعت بخشیدن به ایجاد متغیر لاگر</li>
+            <li>همچنین می توانید از کلاس خود بخواهید Kloggin را گسترش دهد، اما این منجر به داشتن روش های متعددی برای اعلام لاگر بر اساس ظاهر شی همراه شما می شود، بنابراین در حالی که تمیزتر به نظر می رسد، توصیه نمی شود
             </li>
         </ul>
 
-        <h2 id="tips">Tips</h2>
+        <h2 id="tips">نکات</h2>
 
-        <h3 id="strings">Strings</h3>
+        <h3 id="strings">رشته ها</h3>
 
         <ul>
-            <li>Familiarise yourself with Kotlin String template
+            <li>با قالب Kotlin String آشنا شوید
                 <ul>
                     <li><a
                             href="https://kotlinlang.org/docs/reference/basic-types.html#string-templates">https://kotlinlang.org/docs/reference/basic-types.html#string-templates</a>
                     </li>
                 </ul>
             </li>
-            <li>Triple quoted Strings, i.e. <em>”"”some string”"”</em>, are treated as literal and retain all formatting
-                characters and require no escape characters</li>
+            <li>رشته های نقل قول سه گانه، یعنی <em>"""برخی از رشته"</em>""، به عنوان تحت اللفظی در نظر گرفته می شوند و تمام کاراکترهای قالب بندی را حفظ می کنند و نیازی به کاراکترهای فرار ندارند</li>
         </ul>
 
         <h3 id="operator-overloading">Operator overloading</h3>
 
         <ul>
-            <li>In Kotlin operators such as +, - and * are linked linked to corresponding functions and by providing
-                those functions in your classes you can create some powerfully concise handling syntax in a DSL
+            <li>در کاتلین عملگرهایی مانند +، - و * به توابع مربوطه مرتبط هستند و با ارائه آن توابع در کلاس های خود می توانید نحو مدیریت بسیار مختصر را در DSL ایجاد کنید
                 <ul>
                     <li><a
                             href="https://kotlinlang.org/docs/reference/operator-overloading.html">https://kotlinlang.org/docs/reference/operator-overloading.html</a>
@@ -575,11 +545,10 @@
                     </li>
                 </ul>
             </li>
-            <li>Do not abuse this functionality, + sign already means something and regular code so using it for
-                something else is misleading. <strong>Only do this inside your specific DSL</strong>!</li>
+            <li>از این قابلیت سوء استفاده نکنید، + sign در حال حاضر به معنای چیزی و کد معمولی است، بنابراین استفاده از آن برای چیز دیگری گمراه کننده است. این <strong>کار را فقط در DSL خاص خود انجام</strong> دهید!</li>
         </ul>
 
-        <h3 id="equality">Equality</h3>
+        <h3 id="equality">تساوی یا برابری</h3>
 
         <ul>
             <li>The == operator in Kotlin is actually also overloaded (see above) and calls .equals(). If you need to

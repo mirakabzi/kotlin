@@ -1,469 +1,608 @@
-
 <!DOCTYPE html>
-<html lang="en-US">
-  <head>
+<html lang="fa">
+
+<head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Kotlin best practises | kotlin-guide</title>
-<meta name="generator" content="Jekyll v3.9.3" />
-<meta property="og:title" content="Kotlin best practises" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="Repository for storing and publicly serving Kotlin best practice document created by the Wallet team" />
-<meta property="og:description" content="Repository for storing and publicly serving Kotlin best practice document created by the Wallet team" />
-<link rel="canonical" href="https://unity-technologies.github.io/kotlin-guide/" />
-<meta property="og:url" content="https://unity-technologies.github.io/kotlin-guide/" />
-<meta property="og:site_name" content="kotlin-guide" />
-<meta property="og:type" content="website" />
-<meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Kotlin best practises" />
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","description":"Repository for storing and publicly serving Kotlin best practice document created by the Wallet team","headline":"Kotlin best practises","name":"kotlin-guide","url":"https://unity-technologies.github.io/kotlin-guide/"}</script>
-<!-- End Jekyll SEO tag -->
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+    <title>راهنمای جامع زبان کاتلین</title>
+    <meta name="generator" content="Jekyll v3.9.3" />
+    <meta property="og:title" content="راهنمای جامع کاتلین" />
+    <meta property="og:locale" content="fa" />
+    <meta name="description"
+        content="ریپازیتوری درباره ی زبان برنامه نویسی کاتلین به همراه تمام منابع لازم برای یادگیری" />
+    <meta property="og:description"
+        content="ریپازیتوری درباره ی زبان برنامه نویسی کاتلین به همراه تمام منابع لازم برای یادگیری" />
+    <link rel="canonical" href="https://mirakabzi.github.io/kotlin/" />
+    <meta property="og:url" content="https://mirakabzi.github.io/kotlin/" />
+    <meta property="og:site_name" content="راهنمای کاتلین" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
+    <meta property="twitter:title" content="راهنمای جامع کاتلین" />
+    <script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","description":"ریپازیتوری درباره ی زبان برنامه نویسی کاتلین به همراه تمام منابع لازم برای یادگیری","headline":"راهنمای جامع کاتلین","name":"راهنمای کاتلین","url":"https://mirakabzi.github.io/kotlin/"}</script>
+    <!-- End Jekyll SEO tag -->
 
     <link rel="stylesheet" href="/kotlin/style.css">
     <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
 
-<!-- Setup Google Analytics -->
+    <!-- Setup Google Analytics -->
 
 
 
-<!-- You can set your favicon here -->
-<!-- link rel="shortcut icon" type="image/x-icon" href="/kotlin-guide/favicon.ico" -->
+    <!-- You can set your favicon here -->
+    <!-- link rel="shortcut icon" type="image/x-icon" href="/kotlin-guide/favicon.ico" -->
 
-<!-- end custom head snippets -->
+    <!-- end custom head snippets -->
 
-  </head>
-  <body>
+</head>
+
+<body>
     <div class="container-lg px-3 my-5 markdown-body">
-      
-      <h1><a href="https://unity-technologies.github.io/kotlin-guide/">kotlin-guide</a></h1>
-      
 
-      <h1 id="kotlin-best-practises"><strong>Kotlin best practises</strong></h1>
+        <h1><a href="https://unity-technologies.github.io/kotlin-guide/">راهنمای کاتلین</a></h1>
 
-<h2 id="foreword">Foreword</h2>
 
-<p>The purpose of this document is twofold: it has been created to act both as a guide for new developers, especially ones without previous Kotlin experience, on the most important Kotlin specific practises and tools from the perspective of the team and to act as a living document of the various architecture and coding style decisions that the team has made during service development.</p>
+        <h1 id="kotlin-best-practises"><strong>راهنمای جامع زبان کاتلین</strong></h1>
 
-<p>Each service will still have their own architecture decision log, but here we will list any non service specific decisions, style guides and general tips that anyone working on our code base should be aware of.</p>
+        <h2 id="foreword">پیشگفتار</h2>
 
-<p>While this document mainly exists for the Wallet team’s internal usage and therefore only covers things relevant to our particular needs it should also provide a starting point for any other team that wishes to develop with Kotlin, particularly on the backend.</p>
+        <p>
+          این سند با دو هدف تهیه شده است: نخست، به عنوان یک راهنما برای توسعه‌دهندگان تازه‌کاری طراحی شده که به‌ویژه در کار با کاتلین تجربه چندانی ندارند. این راهنما به معرفی مهم‌ترین شیوه‌های مختص کاتلین و ابزارها از دیدگاه تیم می‌پردازد. دوم، این سند به عنوان یک مرجع زنده عمل کرده و معماری‌ها و تصمیمات کدنویسی تیم را که طی فرآیند توسعه خدمات اتخاذ شده‌اند، مستندسازی می‌کند.
+          </p>
 
-<h2 id="what-is-kotlin-and-why-we-use-it">What is Kotlin and why we use it</h2>
+        <p>
+          هر سرویس همچنان گزارشی از تصمیمات معماری خود ارائه می‌دهد، اما در اینجا تصمیمات خاص، راهنماهای سبک، و نکات کلی مرتبط با سرویس‌های غیرفعال را فهرست می‌کنیم که هر فردی که با پایگاه کد ما سر و کار دارد باید از آن‌ها مطلع باشد.
+        </p>
 
-<p><a href="https://en.wikipedia.org/wiki/Kotlin_(programming_language)">https://en.wikipedia.org/wiki/Kotlin_(programming_language)</a></p>
+        <p>
+          در حالی که این سند عمدتاً برای استفاده داخلی تیم کیف پول وجود دارد و بنابراین فقط به موارد مرتبط با نیازهای خاص ما می‌پردازد، باید نقطه شروعی برای هر تیم دیگری که می‌خواهد با کاتلین توسعه دهد، به ویژه در سمت سرور، فراهم کند.
+          </p>
 
-<p><a href="https://kotlinlang.org/">https://kotlinlang.org/</a></p>
+        <h2 id="what-is-kotlin-and-why-we-use-it">کاتلین چیست و چرا از آن استفاده می کنیم</h2>
 
-<p>In short Kotlin is "yet another functional JVM language". The main benefits compared to developing with Java are similar to other functional languages.</p>
+        <p><a
+                href="https://en.wikipedia.org/wiki/Kotlin_(programming_language)">https://en.wikipedia.org/wiki/Kotlin_(programming_language)</a>
+        </p>
 
-<ul>
-  <li>Less boilerplate code</li>
-  <li>More concise syntax</li>
-  <li>Removing(/hiding) internal inconsistencies that Java has accumulated</li>
-  <li>Maintain Java interoperability</li>
-</ul>
+        <p><a href="https://kotlinlang.org/">https://kotlinlang.org/</a></p>
 
-<p>There are however some things Kotlin brings to the table that are not shared by all similar languages.</p>
+        <p>به طور خلاصه کاتلین یک زبان تابعی دیگر برای جی وی ام است. مزایای اصلی آن نسبت به توسعه با جاوا مشابه سایر زبان‌های تابعی است.</p>
 
-<ul>
-  <li>Strict typing + Type inference &lt;3
-    <ul>
-      <li>Kotlin is a strictly typed language</li>
-      <li>Type inference greatly reduces the boiler plate normally associated with that</li>
-    </ul>
-  </li>
-  <li>Null safety
-    <ul>
-      <li>Variables have to be explicitly declared as nullable</li>
-      <li>Safecall handling for nullable values enforced by IDE</li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="learning-kotlin">Learning Kotlin</h2>
-
-<p>This document doesn’t go through all the basics. <a href="https://kotlinlang.org/docs/reference/">https://kotlinlang.org/docs/reference/</a> has all the up to date resources to get you started. The team library also includes <em>Kotlin in Action</em> which is a slightly heavier read but the first few chapters do a really good job of introducing the major differences between Kotlin and Java.</p>
-
-<h1 id="best-practises">Best practises</h1>
-
-<h2 id="principles">Principles</h2>
-
-<h3 id="keep-it-readable">Keep it <strong>Readable</strong></h3>
-
-<p>"Indeed, the ratio of time spent reading versus writing is well over 10 to 1. We are constantly reading old code as part of the effort to write new code. …[Therefore,] making it easy to read makes it easier to write." <em>- Martin C. Fowler, Clean Code</em></p>
-
-<ul>
-  <li>The easier the code is to understand the easier it to see the actual logic and if necessary fix it
-    <ul>
-      <li>Use your judgement
         <ul>
-          <li>Readability for a particular task is generally more valuable than following convention, but convention makes things more readable. Try to maintain a balance of only breaking convention when there is a clear readability improvement</li>
+          <li>کاهش کد</li>  
+          <li>سادگی ساختار</li>  
+          <li>پوشش ناهماهنگی‌های داخلی جاوا</li>  
+          <li>سازگاری با جاوا</li>
         </ul>
-      </li>
-      <li>Concise does not always equate readable
+
+        <p>با این وجود، کاتلین دارای قابلیت‌هایی است که در سایر زبان‌های مشابه نادر است.</p>
+
         <ul>
-          <li>Your function chain with multiple elvis operations that can be extended by passing it a lambda might be really cool and clever, but would it be easier to understand if you just wrote it out in plain old Java style?</li>
-        </ul>
-      </li>
-      <li>New developers will most likely know Java better than Kotlin, so consider this when writing code.
-        <ul>
-          <li>If you’re doing something Kotlin specific that isn’t covered here, consider how easy it to understand and if necessary add a comment into your code or a section to this document</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="keep-it-safe">Keep it <strong>Safe</strong></h3>
-
-<ul>
-  <li>Take full advantage of the added safety features: immutability and null safety</li>
-</ul>
-
-<h2 id="coding-conventions">Coding conventions</h2>
-
-<ul>
-  <li>We follow the Kotlin official conventions unless specifically overruled by this document
-    <ul>
-      <li><a href="https://kotlinlang.org/docs/reference/coding-conventions.html">https://kotlinlang.org/docs/reference/coding-conventions.html</a></li>
-      <li>Several points from the above reference are also listed in this document to highlight them</li>
-      <li>It is important to follow the general coding conventions for most things as this makes it easier for new developers to understand our code, but there are times when your particular problem can be solved in a non standard way that is actually more readable in that particular case.</li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="safe-variable-declarations">Safe variable declarations</h2>
-
-<ul>
-  <li>Always use a <strong>non-nullable type</strong> whenever possible</li>
-  <li>Always declare variables as <strong>val</strong> unless you have a specific reason to use <em>var</em></li>
-  <li>Also use <strong>immutable collections</strong> instead of mutable ones</li>
-  <li>If you need to declare a variable before assigning it a value instead of nullable declare it as <strong>lateinit</strong>
-    <ul>
-      <li>If you find yourself doing this check if you should instead refactor your code to a lambda declaration to initialize the value instead
-        <ul>
-          <li>e.g. <em>val x = { when (y) { … } }</em></li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li>Use <strong>safe calls</strong> and <strong>elvis operator</strong> with nullable variables
-    <ul>
-      <li><a href="https://kotlinlang.org/docs/reference/null-safety.html#safe-calls">https://kotlinlang.org/docs/reference/null-safety.html#safe-calls</a></li>
-      <li><a href="https://kotlinlang.org/docs/reference/null-safety.html#elvis-operator">https://kotlinlang.org/docs/reference/null-safety.html#elvis-operator</a></li>
-      <li><em><strong>Do not use !!</strong></em> to force null pointer exceptions</li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="use-when">Use <em><strong>when</strong></em></h2>
-
-<p><a href="https://kotlinlang.org/docs/reference/control-flow.html#when-expression">https://kotlinlang.org/docs/reference/control-flow.html#when-expression</a></p>
-
-<p>In Java you mainly used the <em>switch</em> statement together with enums. In Kotlin switch has been replaced by <em>when</em> which can and should be used for a far wider array of flow management.</p>
-
-<ul>
-  <li>If you have a code block that has <strong>more than one <em>if</em>-statement</strong> you should almost always <strong>refactor it into a <em>when</em></strong>.</li>
-  <li>If you have an <em>if</em> structure with only boolean checks sometimes it can be more readable with the <em>if</em> structures, so use common sense</li>
-</ul>
-
-<h2 id="classes-and-functions">Classes and functions</h2>
-
-<h3 id="declaring-multiple-classes-in-one-file">Declaring multiple classes in one file</h3>
-
-<ul>
-  <li>Consider defining strongly linked classes in the same file
-    <ul>
-      <li>Data classes that are only used as return values and the class using them</li>
-      <li>Collections of data classes and enums used throughout a package
-        <ul>
-          <li>Such a collection file should named so that it is easily recognized and linkable to the package
-            <ul>
-              <li>g. PackageNameDomainObjects.kt</li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li>Take the file size into account, even though some classes have very strong interconnections you might still want to declare them in their own files to avoid having a massive monolith file you have to scroll through.</li>
-</ul>
-
-<h3 id="constructors">Constructors</h3>
-
-<ul>
-  <li>Try to <strong>only define a <em>primary constructor</em></strong> and, if necessary, an <em>init block</em></li>
-  <li>Instead of overloading the constructor as secondary constructors provide <strong>default arguments</strong>
-    <ul>
-      <li><a href="https://kotlinlang.org/docs/reference/functions.html#default-arguments">https://kotlinlang.org/docs/reference/functions.html#default-arguments</a></li>
-      <li>Defining builders is supported but not recommended as you should be able to achieve the same effect with default arguments and it is best to stick to one way of doing things</li>
-      <li>Not possibly relevant for us but if you need to create your Kotlin object with default arguments from a Java class you will likely need to use the <em>@JavaOverloads</em> annotation</li>
-    </ul>
-  </li>
-  <li>And on the calling side you should use <strong>named arguments</strong> whenever you are not passing all the possible arguments
-    <ul>
-      <li><a href="https://kotlinlang.org/docs/reference/functions.html#named-arguments">https://kotlinlang.org/docs/reference/functions.html#named-arguments</a></li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="parameter-and-state-validation">Parameter and state validation</h3>
-
-<ul>
-  <li>If you need to validate parameter values you should do so explicitly using a <strong>require block</strong></li>
-  <li>Require works similarly to an if statement that that throws an <em>IllegalParameterException</em> if the result is false
-    <ul>
-      <li><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/require.html">https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/require.html</a></li>
-      <li>Can be used in the constructor, init blocks or any function where you need to check parameter values</li>
-    </ul>
-  </li>
-  <li>Correspondly state validation should use similar <strong>check block</strong>
-    <ul>
-      <li><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/check.html">https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/check.html</a></li>
-      <li>Throws <em>IllegalStateException</em></li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="properties-and-data-classes">Properties and data classes</h3>
-
-<p><a href="https://kotlinlang.org/docs/reference/properties.html">https://kotlinlang.org/docs/reference/properties.html</a></p>
-
-<ul>
-  <li>Declare class variables as public and use <strong>property access</strong> instead of setters and getters</li>
-  <li>Variables declared as var can get both get and set externally and val is read only.</li>
-  <li>You can still define an explicit setter or getter for a variable id you need to, for example, do some computation on the value and still use the property access syntax on the calling side</li>
-</ul>
-
-<p><a href="https://kotlinlang.org/docs/reference/data-classes.html">https://kotlinlang.org/docs/reference/data-classes.html</a></p>
-
-<ul>
-  <li>Data classes should be used extensively and declared with the keyword <strong>data</strong></li>
-  <li>Declaring a class as a data class reduces significant amount of boilerplate
-    <ul>
-      <li>All parameters from the primary constructor will be declared as properties</li>
-      <li><em>equals(), hashcode(), copy(), toString(</em>) (and <em>componentN()</em> (for destructuring)) functions will be generated</li>
-      <li>E.g. <strong>data class User(val name: String, var age: Int)</strong> is a complete data class implementation</li>
-    </ul>
-  </li>
-  <li>Data classes come with a build in copy function that can be used to create a copy with value changes
-    <ul>
-      <li><a href="https://kotlinlang.org/docs/reference/data-classes.html#copying">https://kotlinlang.org/docs/reference/data-classes.html#copying</a></li>
-    </ul>
-  </li>
-</ul>
-
-<p>Since many data classes are <strong>only ever created by one class</strong> in the project it in those cases makes sense to <strong>declare data classes in the same file as the creating class</strong></p>
-
-<h3 id="scope-functions">Scope Functions</h3>
-
-<ul>
-  <li>Koltin provides five scope functions, let, run, with, apply, and also, that all exist to execute a block of code on an object. See the link below to learn how they are used:
-    <ul>
-      <li><a href="https://kotlinlang.org/docs/reference/scope-functions.html">https://kotlinlang.org/docs/reference/scope-functions.html</a></li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="companion-objects">Companion objects</h3>
-
-<p><a href="https://kotlinlang.org/docs/reference/object-declarations.html#companion-objects">https://kotlinlang.org/docs/reference/object-declarations.html#companion-objects</a></p>
-
-<ul>
-  <li>Replaces static variables and functions</li>
-  <li>The place to define a factory and any serialization functions related to a data class etc.</li>
-  <li>If you need a static helper function that is only ever used when dealing with this one particular class that should also be declared in the companion object</li>
-</ul>
-
-<h3 id="return-values">Return values</h3>
-
-<ul>
-  <li><strong>Avoid returning null</strong> (especially on public functions)
-    <ul>
-      <li><strong>Null should never be used to denote an error state</strong>
-        <ul>
-          <li>Instead throw an exception</li>
-          <li>Or consider using a sealed class (see below)</li>
-        </ul>
-      </li>
-      <li>When successful execution sometimes yields no results
-        <ul>
-          <li>If the return object is a collection simply return an empty collection</li>
-          <li>On a case-by-case basis you need to decide when it makes more sense to return a nullable or simply throw an exception anyway or defining a sealed class (see below)
-            <ul>
-              <li>This can be difficult to determine when first writing a class</li>
-              <li>It mainly comes down to usage
+            <li>نوع‌نگاری سخت + استنباط نوع &lt;3
                 <ul>
-                  <li>If not returning anything is a common occurrence where no action is, other than filtering the result or similar, is required nullable might make more sense</li>
-                  <li>If returning nothing is exceptionally rare or you usually need to do some handling when it happens (log, stop execution, trigger a different function, etc) then throwing an exception is probably a better idea</li>
-                  <li>Also see the note about sealed classes below as an option, especially if returning a data class that represents the result of an external query</li>
+                  <li>کاتلین زبانی با نوع‌گذاری قوی است.</li>  
+                  <li>با استنباط نوع، کدهای تکراری را به‌طور چشمگیری کاهش می‌دهد.</li>
                 </ul>
-              </li>
-            </ul>
-          </li>
+            </li>
+            <li>ایمنی Null</li>
+              <ul>
+               <li>متغیرها باید به صورت صریح به عنوان نال‌پذیر تعیین شوند</li>
+               <li>مدیریت مقادیر نال‌پذیر با Safecall از طریق IDE ضروری است</li>
+             </ul>
+            </li>
         </ul>
-      </li>
-    </ul>
-  </li>
-  <li>Protect your mutables from other objects making changes to them accidentally
-    <ul>
-      <li>When returning a mutable collection you should upcast it to a non-mutable version
+
+        <h2 id="learning-kotlin">یادگیری کاتلین</h2>
+
+        <p>
+          این سند تمامی اصول اولیه را شامل نمی‌شود. برای منابع به‌روزتر می‌توانید به <a href=https://kotlinlang.org/docs/reference/>https://kotlinlang.org/docs/reference/</a> مراجعه کنید. همچنین، کتابخانه تیم شامل <em>Kotlin in Action</em> است که اگرچه کمی پیچیده‌تر است، اما در فصل‌های نخست به خوبی تفاوت‌های اصلی کاتلین و جاوا را توضیح می‌دهد.
+          </p>
+
+        <h1 id="best-practises">نکات مهم</h1>
+
+        <h2 id="principles">اصول</h2>
+
+        <h3 id="keep-it-readable">آن را <strong>خوانا</strong> نگه دارید</h3>
+
+        <p>"Indeed, the ratio of time spent reading versus writing is well over 10 to 1. We are constantly reading old
+            code as part of the effort to write new code. …[Therefore,] making it easy to read makes it easier to
+            write." <em>- Martin C. Fowler, Clean Code</em></p>
+
         <ul>
-          <li>e. return mutableList as List</li>
+            <li>The easier the code is to understand the easier it to see the actual logic and if necessary fix it
+                <ul>
+                    <li>Use your judgement
+                        <ul>
+                            <li>Readability for a particular task is generally more valuable than following convention,
+                                but convention makes things more readable. Try to maintain a balance of only breaking
+                                convention when there is a clear readability improvement</li>
+                        </ul>
+                    </li>
+                    <li>Concise does not always equate readable
+                        <ul>
+                            <li>Your function chain with multiple elvis operations that can be extended by passing it a
+                                lambda might be really cool and clever, but would it be easier to understand if you just
+                                wrote it out in plain old Java style?</li>
+                        </ul>
+                    </li>
+                    <li>New developers will most likely know Java better than Kotlin, so consider this when writing
+                        code.
+                        <ul>
+                            <li>If you’re doing something Kotlin specific that isn’t covered here, consider how easy it
+                                to understand and if necessary add a comment into your code or a section to this
+                                document</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
         </ul>
-      </li>
-      <li>Similarly you should attempt to protect your other class variables by only returning immutable ones or copies of the data instead of the original.</li>
-    </ul>
-  </li>
-  <li>Use <em>Pair</em> and <em>Triple</em> as return values sparingly
-    <ul>
-      <li>Sometimes you will find yourself wanting to return a few values and for that <em>Pair</em> and <em>Triple</em> are the simplest solution</li>
-      <li>However a better, if slightly more verbose, tactic is to declare a return object data class that contains those values. This makes the handling more explicit and easier to read.</li>
-      <li>As a quick rule of thumb <strong>internal functions can use <em>Pairs</em> and <em>Triples</em></strong> since the creation and handling will always be in the same class, but <strong>public functions should instead return data classes</strong></li>
-      <li>You will notice that many Kotlin libraries do in fact use Pairs &amp; Triples as the public return values, but you will also notice that to use them you will pretty much always have to go to the source code to figure out what is actually returned and in what order.</li>
-    </ul>
-  </li>
-</ul>
 
-<h4 id="returning-sealed-classes">Returning sealed classes</h4>
+        <h3 id="keep-it-safe">Keep it <strong>Safe</strong></h3>
 
-<p><a href="https://kotlinlang.org/docs/reference/sealed-classes.html">https://kotlinlang.org/docs/reference/sealed-classes.html</a></p>
-
-<p><a href="https://phauer.com/2019/sealed-classes-exceptions-kotlin/">https://phauer.com/2019/sealed-classes-exceptions-kotlin/</a></p>
-
-<ul>
-  <li>The above blog post describes a nice looking way of using sealed classes to return success &amp; error states. Consider using it over simply throwing an exception.</li>
-</ul>
-
-<h3 id="chaining-collection-functions">Chaining collection functions</h3>
-
-<ul>
-  <li>Unlike Java Stream API you do not have to explicitly declare that you want to change a collection to a stream and finally explicitly collect the result afterwards.
-    <ul>
-      <li>This means, again, less boilerplate for simple streaming operations like mapping and filtering</li>
-    </ul>
-  </li>
-  <li>Also means each function is implicitly collected and when chaining functions each item in the collection must go through the function before we run the next function on them
-    <ul>
-      <li>This can lead it being slower than Java stream operations which process item at a time rather than chained function at a time</li>
-      <li>For this reason Kotlin introduces <em>sequences</em> which work exactly like Java streams</li>
-    </ul>
-  </li>
-  <li>Whenever you are <strong>chaining multiple functions on a collection</strong> with more than trivial number of items, the best practise is to declare it as a <strong>sequence</strong>
-    <ul>
-      <li><a href="https://blog.kotlin-academy.com/effective-kotlin-use-sequence-for-bigger-collections-with-more-than-one-processing-step-649a15bb4bf">https://blog.kotlin-academy.com/effective-kotlin-use-sequence-for-bigger-collections-with-more-than-one-processing-step-649a15bb4bf</a></li>
-      <li>Kotlin sequences are not parallel and for massive data sets you can be better off using Java parallel streams</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="nested-lambdas">Nested lambdas</h3>
-
-<ul>
-  <li><strong>When nesting lambdas</strong> take particular care to retain readability and you should <strong>avoid using the <em>‘it’</em> default parameter name</strong>, as it can get hard too see which lambda level <em>it</em> refers to</li>
-</ul>
-
-<h3 id="top-level-functions">Top level functions</h3>
-
-<ul>
-  <li>Top level functions replace utility classes</li>
-  <li>They are not declared inside a class, instead they can theoretically be declared in any file inside a package</li>
-  <li>But best practise is to have a [Package/Domain/Etc]<strong>Utils.kt</strong> file in the package and declare all the top level functions in there</li>
-  <li>If your <strong>utility function is only used by one class or only needed when dealing with a particular</strong> class it should probably not be declared as a top level function, but instead it <strong>should be declared inside that class</strong> (see also Companion objects above)</li>
-</ul>
-
-<h3 id="closeables">Closeables</h3>
-
-<ul>
-  <li>Some resources (streams, clients etc.) implement the Closeable interface and after using it you need to explicitly call close() to tell the jvm that you no longer require that resource and it can be garbage collected.</li>
-  <li>Kotlin provides a <strong>use block</strong> that ensures that the resource is properly closed afterwards despite any error conditions or the like
-    <ul>
-      <li><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/use.html">https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/use.html</a></li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="java-libraries">Java libraries</h2>
-
-<ul>
-  <li>Extensions can be used to modify external library behaviour either to provide a more Kotlin like experience or to add a layer of domain specific logic
-    <ul>
-      <li><a href="https://kotlinlang.org/docs/reference/extensions.html">https://kotlinlang.org/docs/reference/extensions.html</a></li>
-    </ul>
-  </li>
-  <li>Keep in mind that Kotlin can not tell whether a Java method can return null (unless it has been correctly annotated) instead it returns a Platform Type
-    <ul>
-      <li><a href="https://kotlinlang.org/docs/reference/java-interop.html">https://kotlinlang.org/docs/reference/java-interop.html</a></li>
-    </ul>
-  </li>
-  <li>Best practice is to <strong>assume that any return values from calls to Java code are always nullable</strong> , that way the IDE will force you to use safe calls
-    <ul>
-      <li>g. If you call a Java method that declares a return type of String <strong>explicitly declare</strong> a variable created from that as String?
         <ul>
-          <li>val fromJava: String? = JavaObject.method()</li>
+            <li>Take full advantage of the added safety features: immutability and null safety</li>
         </ul>
-      </li>
-      <li>Libraries may change, even if you know a Java library can never, under any circumstances, return null, if it isn’t annotated you can not trust that it won’t change without you noticing</li>
-    </ul>
-  </li>
-</ul>
 
-<h2 id="style">Style</h2>
+        <h2 id="coding-conventions">Coding conventions</h2>
 
-<h2 id="tools-and-libraries">Tools and libraries</h2>
+        <ul>
+            <li>We follow the Kotlin official conventions unless specifically overruled by this document
+                <ul>
+                    <li><a
+                            href="https://kotlinlang.org/docs/reference/coding-conventions.html">https://kotlinlang.org/docs/reference/coding-conventions.html</a>
+                    </li>
+                    <li>Several points from the above reference are also listed in this document to highlight them</li>
+                    <li>It is important to follow the general coding conventions for most things as this makes it easier
+                        for new developers to understand our code, but there are times when your particular problem can
+                        be solved in a non standard way that is actually more readable in that particular case.</li>
+                </ul>
+            </li>
+        </ul>
 
-<h3 id="logging">Logging</h3>
+        <h2 id="safe-variable-declarations">Safe variable declarations</h2>
 
-<ul>
-  <li>We use a lazy logging library called kotlin-logging
-    <ul>
-      <li><a href="https://github.com/MicroUtils/kotlin-logging">https://github.com/MicroUtils/kotlin-logging</a></li>
-    </ul>
-  </li>
-  <li>You can create the logger variable outside of you actual class as a top level declaration</li>
-  <li><a href="https://github.com/MicroUtils/kotlin-logging#usage">https://github.com/MicroUtils/kotlin-logging#usage</a> suggest setting up an Idea live template to speed up the logger variable creation</li>
-  <li>You can also have your class extend Kloggin, but that leads to having multiple ways of declaring the logger based on what your companion object looks like, so while cleaner looking it is not recommended</li>
-</ul>
+        <ul>
+            <li>Always use a <strong>non-nullable type</strong> whenever possible</li>
+            <li>Always declare variables as <strong>val</strong> unless you have a specific reason to use <em>var</em>
+            </li>
+            <li>Also use <strong>immutable collections</strong> instead of mutable ones</li>
+            <li>If you need to declare a variable before assigning it a value instead of nullable declare it as
+                <strong>lateinit</strong>
+                <ul>
+                    <li>If you find yourself doing this check if you should instead refactor your code to a lambda
+                        declaration to initialize the value instead
+                        <ul>
+                            <li>e.g. <em>val x = { when (y) { … } }</em></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>Use <strong>safe calls</strong> and <strong>elvis operator</strong> with nullable variables
+                <ul>
+                    <li><a
+                            href="https://kotlinlang.org/docs/reference/null-safety.html#safe-calls">https://kotlinlang.org/docs/reference/null-safety.html#safe-calls</a>
+                    </li>
+                    <li><a
+                            href="https://kotlinlang.org/docs/reference/null-safety.html#elvis-operator">https://kotlinlang.org/docs/reference/null-safety.html#elvis-operator</a>
+                    </li>
+                    <li><em><strong>Do not use !!</strong></em> to force null pointer exceptions</li>
+                </ul>
+            </li>
+        </ul>
 
-<h2 id="tips">Tips</h2>
+        <h2 id="use-when">Use <em><strong>when</strong></em></h2>
 
-<h3 id="strings">Strings</h3>
+        <p><a
+                href="https://kotlinlang.org/docs/reference/control-flow.html#when-expression">https://kotlinlang.org/docs/reference/control-flow.html#when-expression</a>
+        </p>
 
-<ul>
-  <li>Familiarise yourself with Kotlin String template
-    <ul>
-      <li><a href="https://kotlinlang.org/docs/reference/basic-types.html#string-templates">https://kotlinlang.org/docs/reference/basic-types.html#string-templates</a></li>
-    </ul>
-  </li>
-  <li>Triple quoted Strings, i.e. <em>”"”some string”"”</em>, are treated as literal and retain all formatting characters and require no escape characters</li>
-</ul>
+        <p>In Java you mainly used the <em>switch</em> statement together with enums. In Kotlin switch has been replaced
+            by <em>when</em> which can and should be used for a far wider array of flow management.</p>
 
-<h3 id="operator-overloading">Operator overloading</h3>
+        <ul>
+            <li>If you have a code block that has <strong>more than one <em>if</em>-statement</strong> you should almost
+                always <strong>refactor it into a <em>when</em></strong>.</li>
+            <li>If you have an <em>if</em> structure with only boolean checks sometimes it can be more readable with the
+                <em>if</em> structures, so use common sense</li>
+        </ul>
 
-<ul>
-  <li>In Kotlin operators such as +, - and * are linked linked to corresponding functions and by providing those functions in your classes you can create some powerfully concise handling syntax in a DSL
-    <ul>
-      <li><a href="https://kotlinlang.org/docs/reference/operator-overloading.html">https://kotlinlang.org/docs/reference/operator-overloading.html</a></li>
-      <li><a href="https://kotlinlang.org/docs/reference/type-safe-builders.html">https://kotlinlang.org/docs/reference/type-safe-builders.html</a></li>
-    </ul>
-  </li>
-  <li>Do not abuse this functionality, + sign already means something and regular code so using it for something else is misleading. <strong>Only do this inside your specific DSL</strong>!</li>
-</ul>
+        <h2 id="classes-and-functions">Classes and functions</h2>
 
-<h3 id="equality">Equality</h3>
+        <h3 id="declaring-multiple-classes-in-one-file">Declaring multiple classes in one file</h3>
 
-<ul>
-  <li>The == operator in Kotlin is actually also overloaded (see above) and calls .equals(). If you need to check for reference equality the operator is ===</li>
-</ul>
+        <ul>
+            <li>Consider defining strongly linked classes in the same file
+                <ul>
+                    <li>Data classes that are only used as return values and the class using them</li>
+                    <li>Collections of data classes and enums used throughout a package
+                        <ul>
+                            <li>Such a collection file should named so that it is easily recognized and linkable to the
+                                package
+                                <ul>
+                                    <li>g. PackageNameDomainObjects.kt</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>Take the file size into account, even though some classes have very strong interconnections you might
+                still want to declare them in their own files to avoid having a massive monolith file you have to scroll
+                through.</li>
+        </ul>
+
+        <h3 id="constructors">Constructors</h3>
+
+        <ul>
+            <li>Try to <strong>only define a <em>primary constructor</em></strong> and, if necessary, an <em>init
+                    block</em></li>
+            <li>Instead of overloading the constructor as secondary constructors provide <strong>default
+                    arguments</strong>
+                <ul>
+                    <li><a
+                            href="https://kotlinlang.org/docs/reference/functions.html#default-arguments">https://kotlinlang.org/docs/reference/functions.html#default-arguments</a>
+                    </li>
+                    <li>Defining builders is supported but not recommended as you should be able to achieve the same
+                        effect with default arguments and it is best to stick to one way of doing things</li>
+                    <li>Not possibly relevant for us but if you need to create your Kotlin object with default arguments
+                        from a Java class you will likely need to use the <em>@JavaOverloads</em> annotation</li>
+                </ul>
+            </li>
+            <li>And on the calling side you should use <strong>named arguments</strong> whenever you are not passing all
+                the possible arguments
+                <ul>
+                    <li><a
+                            href="https://kotlinlang.org/docs/reference/functions.html#named-arguments">https://kotlinlang.org/docs/reference/functions.html#named-arguments</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+        <h3 id="parameter-and-state-validation">Parameter and state validation</h3>
+
+        <ul>
+            <li>If you need to validate parameter values you should do so explicitly using a <strong>require
+                    block</strong></li>
+            <li>Require works similarly to an if statement that that throws an <em>IllegalParameterException</em> if the
+                result is false
+                <ul>
+                    <li><a
+                            href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/require.html">https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/require.html</a>
+                    </li>
+                    <li>Can be used in the constructor, init blocks or any function where you need to check parameter
+                        values</li>
+                </ul>
+            </li>
+            <li>Correspondly state validation should use similar <strong>check block</strong>
+                <ul>
+                    <li><a
+                            href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/check.html">https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/check.html</a>
+                    </li>
+                    <li>Throws <em>IllegalStateException</em></li>
+                </ul>
+            </li>
+        </ul>
+
+        <h3 id="properties-and-data-classes">Properties and data classes</h3>
+
+        <p><a
+                href="https://kotlinlang.org/docs/reference/properties.html">https://kotlinlang.org/docs/reference/properties.html</a>
+        </p>
+
+        <ul>
+            <li>Declare class variables as public and use <strong>property access</strong> instead of setters and
+                getters</li>
+            <li>Variables declared as var can get both get and set externally and val is read only.</li>
+            <li>You can still define an explicit setter or getter for a variable id you need to, for example, do some
+                computation on the value and still use the property access syntax on the calling side</li>
+        </ul>
+
+        <p><a
+                href="https://kotlinlang.org/docs/reference/data-classes.html">https://kotlinlang.org/docs/reference/data-classes.html</a>
+        </p>
+
+        <ul>
+            <li>Data classes should be used extensively and declared with the keyword <strong>data</strong></li>
+            <li>Declaring a class as a data class reduces significant amount of boilerplate
+                <ul>
+                    <li>All parameters from the primary constructor will be declared as properties</li>
+                    <li><em>equals(), hashcode(), copy(), toString(</em>) (and <em>componentN()</em> (for
+                        destructuring)) functions will be generated</li>
+                    <li>E.g. <strong>data class User(val name: String, var age: Int)</strong> is a complete data class
+                        implementation</li>
+                </ul>
+            </li>
+            <li>Data classes come with a build in copy function that can be used to create a copy with value changes
+                <ul>
+                    <li><a
+                            href="https://kotlinlang.org/docs/reference/data-classes.html#copying">https://kotlinlang.org/docs/reference/data-classes.html#copying</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+        <p>Since many data classes are <strong>only ever created by one class</strong> in the project it in those cases
+            makes sense to <strong>declare data classes in the same file as the creating class</strong></p>
+
+        <h3 id="scope-functions">Scope Functions</h3>
+
+        <ul>
+            <li>Koltin provides five scope functions, let, run, with, apply, and also, that all exist to execute a block
+                of code on an object. See the link below to learn how they are used:
+                <ul>
+                    <li><a
+                            href="https://kotlinlang.org/docs/reference/scope-functions.html">https://kotlinlang.org/docs/reference/scope-functions.html</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+        <h3 id="companion-objects">Companion objects</h3>
+
+        <p><a
+                href="https://kotlinlang.org/docs/reference/object-declarations.html#companion-objects">https://kotlinlang.org/docs/reference/object-declarations.html#companion-objects</a>
+        </p>
+
+        <ul>
+            <li>Replaces static variables and functions</li>
+            <li>The place to define a factory and any serialization functions related to a data class etc.</li>
+            <li>If you need a static helper function that is only ever used when dealing with this one particular class
+                that should also be declared in the companion object</li>
+        </ul>
+
+        <h3 id="return-values">Return values</h3>
+
+        <ul>
+            <li><strong>Avoid returning null</strong> (especially on public functions)
+                <ul>
+                    <li><strong>Null should never be used to denote an error state</strong>
+                        <ul>
+                            <li>Instead throw an exception</li>
+                            <li>Or consider using a sealed class (see below)</li>
+                        </ul>
+                    </li>
+                    <li>When successful execution sometimes yields no results
+                        <ul>
+                            <li>If the return object is a collection simply return an empty collection</li>
+                            <li>On a case-by-case basis you need to decide when it makes more sense to return a nullable
+                                or simply throw an exception anyway or defining a sealed class (see below)
+                                <ul>
+                                    <li>This can be difficult to determine when first writing a class</li>
+                                    <li>It mainly comes down to usage
+                                        <ul>
+                                            <li>If not returning anything is a common occurrence where no action is,
+                                                other than filtering the result or similar, is required nullable might
+                                                make more sense</li>
+                                            <li>If returning nothing is exceptionally rare or you usually need to do
+                                                some handling when it happens (log, stop execution, trigger a different
+                                                function, etc) then throwing an exception is probably a better idea</li>
+                                            <li>Also see the note about sealed classes below as an option, especially if
+                                                returning a data class that represents the result of an external query
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>Protect your mutables from other objects making changes to them accidentally
+                <ul>
+                    <li>When returning a mutable collection you should upcast it to a non-mutable version
+                        <ul>
+                            <li>e. return mutableList as List</li>
+                        </ul>
+                    </li>
+                    <li>Similarly you should attempt to protect your other class variables by only returning immutable
+                        ones or copies of the data instead of the original.</li>
+                </ul>
+            </li>
+            <li>Use <em>Pair</em> and <em>Triple</em> as return values sparingly
+                <ul>
+                    <li>Sometimes you will find yourself wanting to return a few values and for that <em>Pair</em> and
+                        <em>Triple</em> are the simplest solution</li>
+                    <li>However a better, if slightly more verbose, tactic is to declare a return object data class that
+                        contains those values. This makes the handling more explicit and easier to read.</li>
+                    <li>As a quick rule of thumb <strong>internal functions can use <em>Pairs</em> and
+                            <em>Triples</em></strong> since the creation and handling will always be in the same class,
+                        but <strong>public functions should instead return data classes</strong></li>
+                    <li>You will notice that many Kotlin libraries do in fact use Pairs &amp; Triples as the public
+                        return values, but you will also notice that to use them you will pretty much always have to go
+                        to the source code to figure out what is actually returned and in what order.</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h4 id="returning-sealed-classes">Returning sealed classes</h4>
+
+        <p><a
+                href="https://kotlinlang.org/docs/reference/sealed-classes.html">https://kotlinlang.org/docs/reference/sealed-classes.html</a>
+        </p>
+
+        <p><a
+                href="https://phauer.com/2019/sealed-classes-exceptions-kotlin/">https://phauer.com/2019/sealed-classes-exceptions-kotlin/</a>
+        </p>
+
+        <ul>
+            <li>The above blog post describes a nice looking way of using sealed classes to return success &amp; error
+                states. Consider using it over simply throwing an exception.</li>
+        </ul>
+
+        <h3 id="chaining-collection-functions">Chaining collection functions</h3>
+
+        <ul>
+            <li>Unlike Java Stream API you do not have to explicitly declare that you want to change a collection to a
+                stream and finally explicitly collect the result afterwards.
+                <ul>
+                    <li>This means, again, less boilerplate for simple streaming operations like mapping and filtering
+                    </li>
+                </ul>
+            </li>
+            <li>Also means each function is implicitly collected and when chaining functions each item in the collection
+                must go through the function before we run the next function on them
+                <ul>
+                    <li>This can lead it being slower than Java stream operations which process item at a time rather
+                        than chained function at a time</li>
+                    <li>For this reason Kotlin introduces <em>sequences</em> which work exactly like Java streams</li>
+                </ul>
+            </li>
+            <li>Whenever you are <strong>chaining multiple functions on a collection</strong> with more than trivial
+                number of items, the best practise is to declare it as a <strong>sequence</strong>
+                <ul>
+                    <li><a
+                            href="https://blog.kotlin-academy.com/effective-kotlin-use-sequence-for-bigger-collections-with-more-than-one-processing-step-649a15bb4bf">https://blog.kotlin-academy.com/effective-kotlin-use-sequence-for-bigger-collections-with-more-than-one-processing-step-649a15bb4bf</a>
+                    </li>
+                    <li>Kotlin sequences are not parallel and for massive data sets you can be better off using Java
+                        parallel streams</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h3 id="nested-lambdas">Nested lambdas</h3>
+
+        <ul>
+            <li><strong>When nesting lambdas</strong> take particular care to retain readability and you should
+                <strong>avoid using the <em>‘it’</em> default parameter name</strong>, as it can get hard too see which
+                lambda level <em>it</em> refers to</li>
+        </ul>
+
+        <h3 id="top-level-functions">Top level functions</h3>
+
+        <ul>
+            <li>Top level functions replace utility classes</li>
+            <li>They are not declared inside a class, instead they can theoretically be declared in any file inside a
+                package</li>
+            <li>But best practise is to have a [Package/Domain/Etc]<strong>Utils.kt</strong> file in the package and
+                declare all the top level functions in there</li>
+            <li>If your <strong>utility function is only used by one class or only needed when dealing with a
+                    particular</strong> class it should probably not be declared as a top level function, but instead it
+                <strong>should be declared inside that class</strong> (see also Companion objects above)</li>
+        </ul>
+
+        <h3 id="closeables">Closeables</h3>
+
+        <ul>
+            <li>Some resources (streams, clients etc.) implement the Closeable interface and after using it you need to
+                explicitly call close() to tell the jvm that you no longer require that resource and it can be garbage
+                collected.</li>
+            <li>Kotlin provides a <strong>use block</strong> that ensures that the resource is properly closed
+                afterwards despite any error conditions or the like
+                <ul>
+                    <li><a
+                            href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/use.html">https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/use.html</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+        <h2 id="java-libraries">Java libraries</h2>
+
+        <ul>
+            <li>Extensions can be used to modify external library behaviour either to provide a more Kotlin like
+                experience or to add a layer of domain specific logic
+                <ul>
+                    <li><a
+                            href="https://kotlinlang.org/docs/reference/extensions.html">https://kotlinlang.org/docs/reference/extensions.html</a>
+                    </li>
+                </ul>
+            </li>
+            <li>Keep in mind that Kotlin can not tell whether a Java method can return null (unless it has been
+                correctly annotated) instead it returns a Platform Type
+                <ul>
+                    <li><a
+                            href="https://kotlinlang.org/docs/reference/java-interop.html">https://kotlinlang.org/docs/reference/java-interop.html</a>
+                    </li>
+                </ul>
+            </li>
+            <li>Best practice is to <strong>assume that any return values from calls to Java code are always
+                    nullable</strong> , that way the IDE will force you to use safe calls
+                <ul>
+                    <li>g. If you call a Java method that declares a return type of String <strong>explicitly
+                            declare</strong> a variable created from that as String?
+                        <ul>
+                            <li>val fromJava: String? = JavaObject.method()</li>
+                        </ul>
+                    </li>
+                    <li>Libraries may change, even if you know a Java library can never, under any circumstances, return
+                        null, if it isn’t annotated you can not trust that it won’t change without you noticing</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h2 id="style">Style</h2>
+
+        <h2 id="tools-and-libraries">Tools and libraries</h2>
+
+        <h3 id="logging">Logging</h3>
+
+        <ul>
+            <li>We use a lazy logging library called kotlin-logging
+                <ul>
+                    <li><a
+                            href="https://github.com/MicroUtils/kotlin-logging">https://github.com/MicroUtils/kotlin-logging</a>
+                    </li>
+                </ul>
+            </li>
+            <li>You can create the logger variable outside of you actual class as a top level declaration</li>
+            <li><a
+                    href="https://github.com/MicroUtils/kotlin-logging#usage">https://github.com/MicroUtils/kotlin-logging#usage</a>
+                suggest setting up an Idea live template to speed up the logger variable creation</li>
+            <li>You can also have your class extend Kloggin, but that leads to having multiple ways of declaring the
+                logger based on what your companion object looks like, so while cleaner looking it is not recommended
+            </li>
+        </ul>
+
+        <h2 id="tips">Tips</h2>
+
+        <h3 id="strings">Strings</h3>
+
+        <ul>
+            <li>Familiarise yourself with Kotlin String template
+                <ul>
+                    <li><a
+                            href="https://kotlinlang.org/docs/reference/basic-types.html#string-templates">https://kotlinlang.org/docs/reference/basic-types.html#string-templates</a>
+                    </li>
+                </ul>
+            </li>
+            <li>Triple quoted Strings, i.e. <em>”"”some string”"”</em>, are treated as literal and retain all formatting
+                characters and require no escape characters</li>
+        </ul>
+
+        <h3 id="operator-overloading">Operator overloading</h3>
+
+        <ul>
+            <li>In Kotlin operators such as +, - and * are linked linked to corresponding functions and by providing
+                those functions in your classes you can create some powerfully concise handling syntax in a DSL
+                <ul>
+                    <li><a
+                            href="https://kotlinlang.org/docs/reference/operator-overloading.html">https://kotlinlang.org/docs/reference/operator-overloading.html</a>
+                    </li>
+                    <li><a
+                            href="https://kotlinlang.org/docs/reference/type-safe-builders.html">https://kotlinlang.org/docs/reference/type-safe-builders.html</a>
+                    </li>
+                </ul>
+            </li>
+            <li>Do not abuse this functionality, + sign already means something and regular code so using it for
+                something else is misleading. <strong>Only do this inside your specific DSL</strong>!</li>
+        </ul>
+
+        <h3 id="equality">Equality</h3>
+
+        <ul>
+            <li>The == operator in Kotlin is actually also overloaded (see above) and calls .equals(). If you need to
+                check for reference equality the operator is ===</li>
+        </ul>
 
 
-      
+
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js"
+        integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
     <script>anchors.add();</script>
-  </body>
+</body>
+
 </html>

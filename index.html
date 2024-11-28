@@ -195,28 +195,28 @@
                 href="https://kotlinlang.org/docs/reference/control-flow.html#when-expression">https://kotlinlang.org/docs/reference/control-flow.html#when-expression</a>
         </p>
 
-        <p>In Java you mainly used the <em>switch</em> statement together with enums. In Kotlin switch has been replaced
-            by <em>when</em> which can and should be used for a far wider array of flow management.</p>
+        <p>در جاوا شما عمدتا از عبارت <em>switch</em> همراه با enums استفاده می کنید. سوئیچ در کاتلین با <em>زمانی</em> جایگزین شده است که می تواند و باید برای آرایه بسیار گسترده تری از مدیریت جریان استفاده شود.</p>
 
         <ul>
-            <li>If you have a code block that has <strong>more than one <em>if</em>-statement</strong> you should almost
-                always <strong>refactor it into a <em>when</em></strong>.</li>
-            <li>If you have an <em>if</em> structure with only boolean checks sometimes it can be more readable with the
-                <em>if</em> structures, so use common sense</li>
+            <li>
+              اگر یک بلوک کد دارید که <strong>بیش از یک <em>if-statement</em></strong> دارد، تقریبا همیشه <strong>باید آن را به <em>یک زمان</em> تغییر</strong> دهید.
+              </li>
+            <li>
+              اگر ساختار <em>if</em> دارید که فقط با چک های بولین است، گاهی اوقات می تواند با ساختارهای <em>if</em> خوانا تر باشد، بنابراین از عقل سلیم استفاده کنید
+              </li>
         </ul>
 
-        <h2 id="classes-and-functions">Classes and functions</h2>
+        <h2 id="classes-and-functions">کلاس ها و توابع</h2>
 
-        <h3 id="declaring-multiple-classes-in-one-file">Declaring multiple classes in one file</h3>
+        <h3 id="declaring-multiple-classes-in-one-file">اعلام چندین کلاس در یک فایل</h3>
 
         <ul>
-            <li>Consider defining strongly linked classes in the same file
+            <li>تعریف کلاس های به شدت مرتبط در همان فایل را در نظر بگیرید
                 <ul>
-                    <li>Data classes that are only used as return values and the class using them</li>
-                    <li>Collections of data classes and enums used throughout a package
+                    <li>کلاس های داده ای که فقط به عنوان مقادیر بازگشتی استفاده می شوند و کلاسی که از آنها استفاده می کند</li>
+                    <li>مجموعه ای از کلاس های داده و enums مورد استفاده در سراسر یک پکیج
                         <ul>
-                            <li>Such a collection file should named so that it is easily recognized and linkable to the
-                                package
+                            <li>چنین فایل مجموعه ای باید به گونه ای نامگذاری شود که به راحتی قابل شناسایی و پیوند به بسته باشد
                                 <ul>
                                     <li>g. PackageNameDomainObjects.kt</li>
                                 </ul>
@@ -225,30 +225,27 @@
                     </li>
                 </ul>
             </li>
-            <li>Take the file size into account, even though some classes have very strong interconnections you might
-                still want to declare them in their own files to avoid having a massive monolith file you have to scroll
-                through.</li>
+            <li>اندازه فایل را در نظر بگیرید، حتی اگر برخی از کلاس ها اتصالات بسیار قوی دارند، ممکن است همچنان بخواهید آنها را در فایل های خود اعلام کنید تا از داشتن یک فایل یکپارچه عظیم که باید در آن پیمایش کنید جلوگیری کنید.</li>
         </ul>
 
-        <h3 id="constructors">Constructors</h3>
+        <h3 id="constructors">سازنده</h3>
 
         <ul>
-            <li>Try to <strong>only define a <em>primary constructor</em></strong> and, if necessary, an <em>init
-                    block</em></li>
-            <li>Instead of overloading the constructor as secondary constructors provide <strong>default
-                    arguments</strong>
+            <li>
+              سعی کنید <strong>فقط یک <em>constructor اولیه</em></strong> و در صورت لزوم یک <em>بلوک init</em> تعریف کنید
+                  </li>
+            <li>به جای بارگذاری بیش از حد constructor به عنوان constructors ثانویه<strong>، آرگومان های پیش فرض را ارائه می دهند</strong>
                 <ul>
                     <li><a
                             href="https://kotlinlang.org/docs/reference/functions.html#default-arguments">https://kotlinlang.org/docs/reference/functions.html#default-arguments</a>
                     </li>
-                    <li>Defining builders is supported but not recommended as you should be able to achieve the same
-                        effect with default arguments and it is best to stick to one way of doing things</li>
-                    <li>Not possibly relevant for us but if you need to create your Kotlin object with default arguments
-                        from a Java class you will likely need to use the <em>@JavaOverloads</em> annotation</li>
+                    <li>تعریف سازندگان پشتیبانی می شود اما توصیه نمی شود زیرا شما باید بتوانید با آرگومان های پیش فرض به همان اثر دست یابید و بهتر است به یک روش برای انجام کارها پایبند باشید</li>
+                    <li>
+                      احتمالا برای ما مرتبط نیست، اما اگر نیاز به ایجاد شی کاتلین خود با آرگومان های پیش فرض از یک کلاس جاوا دارید، احتمالا باید از <em>حاشیه نویسی @JavaOverloads</em> استفاده کنید.
+                      </li>
                 </ul>
             </li>
-            <li>And on the calling side you should use <strong>named arguments</strong> whenever you are not passing all
-                the possible arguments
+            <li>و در سمت فراخوانی شما باید از <strong>آرگومان های نامگذاری</strong> شده استفاده کنید هر زمان که تمام استدلال های ممکن را رد نمی کنید
                 <ul>
                     <li><a
                             href="https://kotlinlang.org/docs/reference/functions.html#named-arguments">https://kotlinlang.org/docs/reference/functions.html#named-arguments</a>
@@ -257,43 +254,42 @@
             </li>
         </ul>
 
-        <h3 id="parameter-and-state-validation">Parameter and state validation</h3>
+        <h3 id="parameter-and-state-validation">اعتبار سنجی پارامتر و حالت</h3>
 
         <ul>
-            <li>If you need to validate parameter values you should do so explicitly using a <strong>require
-                    block</strong></li>
-            <li>Require works similarly to an if statement that that throws an <em>IllegalParameterException</em> if the
-                result is false
+            <li>
+              اگر نیاز به اعتبارسنجی مقادیر پارامتر دارید، باید این کار را به صراحت با استفاده از <strong>یک بلوک نیاز</strong> انجام دهید
+                  </li>
+            <li>Require مشابه یک عبارت if عمل می کند که اگر نتیجه نادرست باشد، یک <em>IllegalParameterException</em> را پرتاب می کند
                 <ul>
                     <li><a
                             href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/require.html">https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/require.html</a>
                     </li>
-                    <li>Can be used in the constructor, init blocks or any function where you need to check parameter
-                        values</li>
+                    <li>قابل استفاده در constructor، بلوک های init یا هر تابعی که در آن نیاز به بررسی مقادیر پارامتر دارید</li>
                 </ul>
             </li>
-            <li>Correspondly state validation should use similar <strong>check block</strong>
+            <li>به همین ترتیب، اعتبارسنجی حالت باید از <strong>بلوک چک</strong> مشابه استفاده کند
                 <ul>
                     <li><a
                             href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/check.html">https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/check.html</a>
                     </li>
-                    <li>Throws <em>IllegalStateException</em></li>
+                    <li><em>IllegalStateException</em> را پرتاب می کند</li>
                 </ul>
             </li>
         </ul>
 
-        <h3 id="properties-and-data-classes">Properties and data classes</h3>
+        <h3 id="properties-and-data-classes">ویژگی ها و کلاس های داده</h3>
 
         <p><a
                 href="https://kotlinlang.org/docs/reference/properties.html">https://kotlinlang.org/docs/reference/properties.html</a>
         </p>
 
         <ul>
-            <li>Declare class variables as public and use <strong>property access</strong> instead of setters and
-                getters</li>
-            <li>Variables declared as var can get both get and set externally and val is read only.</li>
-            <li>You can still define an explicit setter or getter for a variable id you need to, for example, do some
-                computation on the value and still use the property access syntax on the calling side</li>
+            <li>
+              اعلام متغیرهای کلاس به عنوان عمومی و استفاده <strong>از دسترسی به ویژگی</strong> به جای setters و getters
+              </li>
+            <li>متغیرهای اعلام شده به عنوان var می توانند هم get و هم set را به صورت خارجی دریافت کنند و val فقط خوانده می شود.</li>
+            <li>هنوز هم می توانید یک تنظیم کننده یا گیرنده صریح برای شناسه متغیری که نیاز دارید تعریف کنید، به عنوان مثال، برخی از محاسبات را روی مقدار انجام دهید و همچنان از نحو دسترسی به ویژگی در سمت فراخوانی استفاده کنید</li>
         </ul>
 
         <p><a
@@ -301,17 +297,17 @@
         </p>
 
         <ul>
-            <li>Data classes should be used extensively and declared with the keyword <strong>data</strong></li>
-            <li>Declaring a class as a data class reduces significant amount of boilerplate
+            <li>کلاس های داده باید به طور گسترده استفاده شوند و با <strong>داده</strong> های کلمه کلیدی اعلام شوند</li>
+            <li>اعلام یک کلاس به عنوان یک کلاس داده مقدار قابل توجهی از دیگ بخار را کاهش می دهد
                 <ul>
-                    <li>All parameters from the primary constructor will be declared as properties</li>
+                    <li>تمام پارامترهای سازنده اولیه به عنوان ویژگی ها اعلام می شوند</li>
                     <li><em>equals(), hashcode(), copy(), toString(</em>) (and <em>componentN()</em> (for
                         destructuring)) functions will be generated</li>
                     <li>E.g. <strong>data class User(val name: String, var age: Int)</strong> is a complete data class
                         implementation</li>
                 </ul>
             </li>
-            <li>Data classes come with a build in copy function that can be used to create a copy with value changes
+            <li>کلاس های داده دارای یک تابع کپی ساخت هستند که می توان از آن برای ایجاد یک کپی با تغییرات مقدار استفاده کرد
                 <ul>
                     <li><a
                             href="https://kotlinlang.org/docs/reference/data-classes.html#copying">https://kotlinlang.org/docs/reference/data-classes.html#copying</a>
@@ -320,14 +316,12 @@
             </li>
         </ul>
 
-        <p>Since many data classes are <strong>only ever created by one class</strong> in the project it in those cases
-            makes sense to <strong>declare data classes in the same file as the creating class</strong></p>
+        <p>از آنجایی که بسیاری از کلاس های داده <strong>فقط توسط یک کلاس</strong> در پروژه ایجاد می شوند، در این موارد منطقی است که <strong>کلاس های داده را در همان فایل کلاس ایجاد</strong> کننده اعلام کنیم</p>
 
-        <h3 id="scope-functions">Scope Functions</h3>
+        <h3 id="scope-functions">توابع محدوده</h3>
 
         <ul>
-            <li>Koltin provides five scope functions, let, run, with, apply, and also, that all exist to execute a block
-                of code on an object. See the link below to learn how they are used:
+            <li>Koltin پنج تابع scope را ارائه می دهد، let، run، with، apply، و همچنین، که همه برای اجرای یک بلوک کد بر روی یک شی وجود دارند. برای اطلاع از نحوه استفاده از آنها به لینک زیر مراجعه کنید:
                 <ul>
                     <li><a
                             href="https://kotlinlang.org/docs/reference/scope-functions.html">https://kotlinlang.org/docs/reference/scope-functions.html</a>
@@ -336,20 +330,19 @@
             </li>
         </ul>
 
-        <h3 id="companion-objects">Companion objects</h3>
+        <h3 id="companion-objects">اشیاء همراه</h3>
 
         <p><a
                 href="https://kotlinlang.org/docs/reference/object-declarations.html#companion-objects">https://kotlinlang.org/docs/reference/object-declarations.html#companion-objects</a>
         </p>
 
         <ul>
-            <li>Replaces static variables and functions</li>
-            <li>The place to define a factory and any serialization functions related to a data class etc.</li>
-            <li>If you need a static helper function that is only ever used when dealing with this one particular class
-                that should also be declared in the companion object</li>
+            <li>متغیرها و توابع استاتیک را جایگزین می کند</li>
+            <li>محل تعریف یک کارخانه و هر گونه توابع سریال سازی مربوط به یک کلاس داده و غیره.</li>
+            <li>اگر به یک تابع کمکی استاتیک نیاز دارید که فقط هنگام برخورد با این یک کلاس خاص که باید در شی همراه نیز اعلام شود، استفاده می شود</li>
         </ul>
 
-        <h3 id="return-values">Return values</h3>
+        <h3 id="return-values">مقدار بازگشتی</h3>
 
         <ul>
             <li><strong>Avoid returning null</strong> (especially on public functions)
